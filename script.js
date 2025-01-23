@@ -24,13 +24,7 @@ const ambientLight = new THREE.AmbientLight(0x404040, 0.8); // Soft ambient ligh
 scene.add(ambientLight);
 
 // Load the environment map (HDR texture)
-const rgbeLoader = new RGBELoader();
-rgbeLoader.load(
-    'https://cdn.jsdelivr.net/gh/pmndrs/drei-assets@master/hdri/venice_sunset_1k.hdr', // Example HDRI
-    (texture) => {
-        texture.mapping = THREE.EquirectangularReflectionMapping;
-        scene.environment = texture; // Set as environment map
-        scene.background = texture; // Set as the background
+scene.background = new THREE.Color(0x222222);
     }
 );
 
