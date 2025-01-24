@@ -18,6 +18,7 @@ const rgbeLoader = new RGBELoader();
 rgbeLoader.load("environment.hdr", (texture) => {
   texture.mapping = THREE.EquirectangularReflectionMapping;
   scene.environment = texture;
+    scene.background = texture;
 });
 
 // Load GLB Model
