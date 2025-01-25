@@ -8,7 +8,6 @@
   <style>
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
   overflow: hidden;
   color: #ffffff;
 }
@@ -19,29 +18,39 @@ canvas {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1; /* Hintergrund für 3D */
+  z-index: -1;
 }
 .overlay {
-  position: absolute;
+  position: relative;
   top: 10%;
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
-  z-index: 1; /* Overlay sichtbar */
+  z-index: 1; 
 }
 .overlay h1 {
-  font-size: 2rem;
+  font-family: Dm Sans, sans-serif;
+  font-weight: 200;
+  font-size: 1.5em;
   margin: 0;
   z-index: 2;
   color: #ff0000;
-  position: relative;
+  bottom: 0; 
+  left: 0; 
+  width: 100%; 
+  text-align: center;
 }
+
 .overlay p {
-  font-size: 1rem;
+  font-family: Pinyon Script, serif;
+  font-size: 0.75em;
   margin: 0;
   color: #000000;
-  position: relative;
-  z-index: -1; /* Hinter dem 3D-Modell */
+  position: absolute; 
+  bottom: 0; 
+  left: 0; 
+  width: 100%; 
+  text-align: center; 
 }
   </style>
   <script type="importmap">
