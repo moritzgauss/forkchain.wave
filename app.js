@@ -53,7 +53,7 @@ controls.dampingFactor = 0.1;
 controls.minDistance = 5; // Set how close the camera can zoom in
 controls.maxDistance = 50; // Set how far the camera can zoom out
 
-// Create Text
+// Create Text: "Food Art & Design"
 const fontLoader = new FontLoader();
 fontLoader.load("https://cdn.jsdelivr.net/npm/three@0.155.0/examples/fonts/helvetiker_regular.typeface.json", (font) => {
   const textGeometry = new TextGeometry("Food Art & Design", {
@@ -63,11 +63,8 @@ fontLoader.load("https://cdn.jsdelivr.net/npm/three@0.155.0/examples/fonts/helve
     curveSegments: 12,
   });
 
-// Set color to red
-const textMaterial = new THREE.MeshStandardMaterial({ color: 0xff0000 });
-const textMesh = new THREE.Mesh(textGeometry, textMaterial);
-
-
+  const textMaterial = new THREE.MeshStandardMaterial({ color: 0xff0000 });
+  const textMesh = new THREE.Mesh(textGeometry, textMaterial);
   textMesh.position.set(-8, 2, -5); // Positioned behind the model
   textMesh.rotation.x = -0.1;
   scene.add(textMesh);
@@ -100,6 +97,71 @@ const textMesh = new THREE.Mesh(textGeometry, textMaterial);
   window.addEventListener("click", waveText);
 });
 
+// Create Text for the link: "Visit Website"
+fontLoader.load("https://cdn.jsdelivr.net/npm/three@0.155.0/examples/fonts/helvetiker_regular.typeface.json", (font) => {
+  const textGeometry = new TextGeometry("Visit Website", {
+    font: font,
+    size: 1,
+    height: 0.2,
+    curveSegments: 12,
+  });
+
+  const textMaterial = new THREE.MeshStandardMaterial({ color: 0x00ff00 }); // Green text
+  const textMesh = new THREE.Mesh(textGeometry, textMaterial);
+  textMesh.position.set(4, 2, -5); // Adjust position as needed
+  textMesh.rotation.x = -0.1;
+  scene.add(textMesh);
+
+  // Raycasting for Mouse Hover
+  const raycaster = new THREE.Raycaster();
+  const mouse = new THREE.Vector2();
+
+  // Function to update mouse position on hover and apply underline effect
+  const onMouseMove = (event) => {
+    // Normalize mouse coordinates
+    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+    // Update raycaster with mouse position
+    raycaster.setFromCamera(mouse, camera);
+
+    // Check if mouse intersects with the text
+    const intersects = raycaster.intersectObject(textMesh);
+
+    if (intersects.length > 0) {
+      // Apply underline effect on hover
+      textMaterial.color.set(0x0000ff); // Change text color on hover (blue)
+      textGeometry.parameters.size = 1.1; // Slightly increase the size
+    } else {
+      // Reset text color and size when not hovering
+      textMaterial.color.set(0x00ff00);
+      textGeometry.parameters.size = 1;
+    }
+  };
+
+  // Event listener for mouse move (hover effect)
+  window.addEventListener("mousemove", onMouseMove);
+
+  // Add click event for navigation
+  window.addEventListener("click", (event) => {
+    const intersects = raycaster.intersectObject(textMesh);
+    if (intersects.length > 0) {
+      // Navigate to website when clicked
+      window.open("https://apinchofsalt.de/", "_blank");
+    }
+  });
+});
+
+// Add Background Music
+const audio = new Audio("./under_your_spell.mp3"); // Replace with your MP3 file path
+audio.loop = true;
+
+document.body.addEventListener("click", () => {
+  if (audio.paused) {
+    audio.play().catch((err) => console.error("Failed to play audio:", err));
+  }
+});
+
 // Animation Loop
 const animate = () => {
   requestAnimationFrame(animate);
@@ -113,14 +175,4 @@ window.addEventListener("resize", () => {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
-});
-
-// Add Background Music
-const audio = new Audio("./under_your_spell.mp3"); // Replace with your MP3 file path
-audio.loop = true;
-
-document.body.addEventListener("click", () => {
-  if (audio.paused) {
-    audio.play().catch((err) => console.error("Failed to play audio:", err));
-  }
 });
