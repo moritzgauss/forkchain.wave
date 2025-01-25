@@ -99,7 +99,7 @@ fontLoader.load("https://cdn.jsdelivr.net/npm/three@0.155.0/examples/fonts/helve
 
 // Create Text for the link: "Visit Website"
 fontLoader.load("https://cdn.jsdelivr.net/npm/three@0.155.0/examples/fonts/helvetiker_regular.typeface.json", (font) => {
-  const textGeometry = new TextGeometry("Visit Website", {
+  const textGeometry = new TextGeometry("apinchofsalt.de", {
     font: font,
     size: 1,
     height: 0.2,
