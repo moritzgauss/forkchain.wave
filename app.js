@@ -31,8 +31,8 @@ gltfLoader.load(
   "model.glb",
   (gltf) => {
     const model = gltf.scene;
-    model.scale.set(3, 6, 3);
-    model.position.set(0, -6, 0); // Position the model on the ground
+    model.scale.set(3, 3, 3);
+    model.position.set(0, -2, 0); // Position the model on the ground
     model.traverse((child) => {
       if (child.isMesh) {
         child.castShadow = true; // Enable shadow casting
