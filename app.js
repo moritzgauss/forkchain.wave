@@ -65,7 +65,7 @@ fontLoader.load("https://cdn.jsdelivr.net/npm/three@0.155.0/examples/fonts/helve
 
   const textMaterial = new THREE.MeshStandardMaterial({ color: 0xff0000 });
   const textMesh = new THREE.Mesh(textGeometry, textMaterial);
-  textMesh1.position.set(-12, 2, -5); // Slightly above and behind the model
+  textMesh.position.set(-12, 2, -5); // Slightly above and behind the model
   scene.add(textMesh);
 
   // Animate Text (Flag Effect)
