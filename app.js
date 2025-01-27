@@ -14,6 +14,8 @@ const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 renderer.setClearColor(0x000000, 0); // Transparent background
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.outputEncoding = THREE.sRGBEncoding;
+renderer.shadowMap.enabled = true;  // Enable shadows
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 document.body.appendChild(renderer.domElement);
 
 // Load HDR Environment
@@ -29,7 +31,14 @@ gltfLoader.load(
   "model.glb",
   (gltf) => {
     const model = gltf.scene;
-    model.scale.set(4, 4, 4);
+    model.scale.set(3, 6, 3);
+    model.position.set(0, -6, 0); // Position the model on the ground
+    model.traverse((child) => {
+      if (child.isMesh) {
+        child.castShadow = true; // Enable shadow casting
+        child.receiveShadow = true; // Enable shadow receiving
+      }
+    });
     scene.add(model);
   },
   undefined,
@@ -44,7 +53,17 @@ scene.add(ambientLight);
 
 const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
 directionalLight.position.set(10, 10, 10);
+directionalLight.castShadow = true; // Ensure light casts shadows
 scene.add(directionalLight);
+
+// Create Ground Plane to Receive Shadows
+const groundGeometry = new THREE.PlaneGeometry(50, 50);
+const groundMaterial = new THREE.ShadowMaterial({ opacity: 0.3 }); // Transparent shadow
+const groundPlane = new THREE.Mesh(groundGeometry, groundMaterial);
+groundPlane.rotation.x = -Math.PI / 2; // Rotate the ground to be horizontal
+groundPlane.position.y = -2; // Position below the model
+groundPlane.receiveShadow = true; // Ensure it receives shadows
+scene.add(groundPlane);
 
 // Orbit Controls for Camera Movement
 const controls = new OrbitControls(camera, renderer.domElement);
@@ -65,7 +84,8 @@ fontLoader.load("https://cdn.jsdelivr.net/npm/three@0.155.0/examples/fonts/helve
 
   const textMaterial = new THREE.MeshStandardMaterial({ color: 0xff0000 });
   const textMesh = new THREE.Mesh(textGeometry, textMaterial);
-  textMesh.position.set(-12, 2, -5); // Slightly above and behind the model
+  textMesh.position.set(-20, 4, -10); // Move the text further behind the model
+  textMesh.rotation.x = -0.1;
   scene.add(textMesh);
 
   // Animate Text (Flag Effect)
@@ -107,7 +127,8 @@ fontLoader.load("https://cdn.jsdelivr.net/npm/three@0.155.0/examples/fonts/helve
 
   const textMaterial = new THREE.MeshStandardMaterial({ color: 0x00ff00 }); // Green text
   const textMesh = new THREE.Mesh(textGeometry, textMaterial);
-  textMesh.position.set(2, 2, -5);
+  textMesh.position.set(6, 4, -10); // Move the text further behind the model
+  textMesh.rotation.x = -0.1;
   scene.add(textMesh);
 
   // Raycasting for Mouse Hover
