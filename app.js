@@ -29,7 +29,7 @@ gltfLoader.load(
   "model.glb",
   (gltf) => {
     const model = gltf.scene;
-    model.scale.set(2, 2, 2);
+    model.scale.set(4, 4, 4);
     scene.add(model);
   },
   undefined,
@@ -58,7 +58,7 @@ const fontLoader = new FontLoader();
 fontLoader.load("https://cdn.jsdelivr.net/npm/three@0.155.0/examples/fonts/helvetiker_regular.typeface.json", (font) => {
   const textGeometry = new TextGeometry("Food Art & Design", {
     font: font,
-    size: 1,
+    size: 2,
     height: 0.2,
     curveSegments: 12,
   });
@@ -101,7 +101,7 @@ fontLoader.load("https://cdn.jsdelivr.net/npm/three@0.155.0/examples/fonts/helve
 fontLoader.load("https://cdn.jsdelivr.net/npm/three@0.155.0/examples/fonts/helvetiker_regular.typeface.json", (font) => {
   const textGeometry = new TextGeometry("apinchofsalt.de", {
     font: font,
-    size: 1,
+    size: 2,
     height: 0.2,
     curveSegments: 12,
   });
