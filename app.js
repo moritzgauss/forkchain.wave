@@ -65,7 +65,7 @@ fontLoader.load("https://cdn.jsdelivr.net/npm/three@0.155.0/examples/fonts/helve
 
   const textMaterial = new THREE.MeshStandardMaterial({ color: 0xff0000 });
   const textMesh = new THREE.Mesh(textGeometry, textMaterial);
-  textMesh.position.set(-10, 4, -5); // Positioned behind the model
+  textMesh.position.set(-12, 1, -5); // Positioned behind the model
   scene.add(textMesh);
 
   // Animate Text (Flag Effect)
@@ -107,7 +107,7 @@ fontLoader.load("https://cdn.jsdelivr.net/npm/three@0.155.0/examples/fonts/helve
 
   const textMaterial = new THREE.MeshStandardMaterial({ color: 0x00ff00 }); // Green text
   const textMesh = new THREE.Mesh(textGeometry, textMaterial);
-  textMesh.position.set(6, 4, -5); // Adjust position as needed
+  textMesh.position.set(4, 1, -5); // Adjust position as needed
   scene.add(textMesh);
 
   // Raycasting for Mouse Hover
