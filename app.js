@@ -125,7 +125,7 @@ fontLoader.load("https://cdn.jsdelivr.net/npm/three@0.155.0/examples/fonts/helve
     curveSegments: 12,
   });
 
-  const textMaterial = new THREE.MeshStandardMaterial({ color: 0x00ff00 }); // Green text
+  const textMaterial = new THREE.MeshStandardMaterial({ color: 0x000000 }); // Green text
   const textMesh = new THREE.Mesh(textGeometry, textMaterial);
   textMesh.position.set(6, 4, -10); // Move the text further behind the model
   textMesh.rotation.x = -0.1;
